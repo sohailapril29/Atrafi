@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>atrafi</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+</head>
+<body>
+    <header>
+        <div class="nav container">
+            <i class="ri-menu-line" id="menu-icon"></i>
+
+            <a href="index.html" class="logo">atrafi</a>
+            <div class="navbar">
+                <a href="#products" class="nav-link">Prosthetics</a>
+                <a href="#products" class="nav-link">Orthotics</a>
+                <a href="#products" class="nav-link">Spinal</a>
+                <a href="#products" class="nav-link">Pediatric</a>
+                <a href="#products" class="nav-link">Trauma</a>
+            </div>
+
+            <a href="cart.html">
+                <i class="ri-shopping-bag-line" id="cart-icon"><span class="cart-count">0</span></i>
+            </a>
+
+        </div>
+    </header>
+
+    <section class="cart-container">
+        <a href="/index.html" class="back-homepage"><i class="ri-arrow-left-s-line"></i><span>Back To Home</span></a>
+        <h2 class="cart-s-title">Shopping Cart</h2>
+        <div class="cart-box">
+            <div class="cart-data">
+                <div id="cartItems"></div>
+            </div>
+            <div class="cart-t">
+                <div id="cartTotal"></div>
+                <a href="#" class="checkout-btn">Checkout</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+
+
+<script>
+
+    document.querySelector('.checkout-btn').addEventListener('click', async () => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    const response = await fetch('http://localhost:3000/create-checkout-session', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ cartItems })
+    });
+
+    const data = await response.json();
+    window.location.href = data.url; // redirect to Stripe checkout
+});
+
+
+
+</script>
+</html>

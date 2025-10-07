@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atrafi</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="nav container">
+            <i class="ri-menu-line" id="menu-icon"></i>
+
+            <a href="#" class="logo">atrafi</a>
+            <div class="navbar">
+                <a href="#home" class="nav-link">HOME</a>
+                <a href="#products" class="nav-link">PROSTHETICS</a>
+                <a href="#about" class="nav-link">ABOUT US</a>
+                <a href="#contactus" class="nav-link">CONTACT US</a>
+            </div>
+
+            <a href="cart.html">
+                <i class="ri-shopping-bag-line" id="cart-icon"><span class="cart-count">0</span></i>
+            </a>
+
+        </div>
+    </header>
+
+    <section class="home" id="home">
+        <div class="home-img container">
+            <img src="/images/1.png" class="hero-img" alt="Prosthetic leg in the center">
+        </div>
+    </section>
+
+
+    <section class="mission container">
+        <h2 class="heading">Our Mission</h2>
+        <p>
+            Atrafi is dedicated to provide and maintain the highest quality of comprehensive
+            orthotic and prosthetic (O&P) and rehabilitation care for our patients
+            in a scientific and professional environment.
+        </p>
+    </section>
+
+
+
+    <section class="mission container">
+        <h2 class="heading">حول مركز أطرافي الطبي
+        </h2>
+        <p>
+            مركز أطرافي الطبي للأطراف الصناعية والأجهزة التقويمية للكبار يعمل مركز أطرافي بالتعاون مع الأطباء والمعالجين
+            وغيرهم من المتخصصين في الرعاية الصحية لخدمة المرضى الأطفال والبالغين والمسنين. من خلال شراكتنا مع شركات
+            رائدة في مجال تصنيع أجهزة تقويم العظام والأطراف الصناعية، فإننا نقدم مجموعة كاملة من الخدمات المتخصصة لتلبية
+            احتياجات مرضانا.
+
+        </p>
+    </section>
+
+
+<section class="products container" id="products">
+    <h2 class="heading">Prosthetics</h2>
+    <div class="product-container" id="productList">
+
+        <div class="product" data-id="2">
+            <img src="/images/2.jpeg" class="product-img" alt="Prosthetic arm">
+            <div class="product-info">
+                <h2 class="product-title">Prosthetic Leg</h2>
+                <p class="product-price">607 ر.س</p>
+                <a class="add-to-cart" onclick="addToCart(this.parentElement.parentElement)">Add to cart</a>
+            </div>
+        </div>
+
+        <div class="product" data-id="3">
+            <img src="/images/3.jpeg" class="product-img" alt="Prosthetic hand">
+            <div class="product-info">
+                <h2 class="product-title">Prosthetic Leg</h2>
+                <p class="product-price">607 ر.س</p>
+                <a class="add-to-cart" onclick="addToCart(this.parentElement.parentElement)">Add to cart</a>
+            </div>
+        </div>
+
+        <div class="product" data-id="4">
+            <img src="/images/4.jpeg" class="product-img" alt="Spinal orthotic">
+            <div class="product-info">
+                <h2 class="product-title">Prosthetic Leg</h2>
+                <p class="product-price">607 ر.س</p>
+                <a class="add-to-cart" onclick="addToCart(this.parentElement.parentElement)">Add to cart</a>
+            </div>
+        </div>
+
+        <div class="product" data-id="5">
+            <img src="/images/5.jpeg" class="product-img" alt="Orthotic leg">
+            <div class="product-info">
+                <h2 class="product-title">Prosthetic Leg</h2>
+                <p class="product-price">607 ر.س</p>
+                <a class="add-to-cart" onclick="addToCart(this.parentElement.parentElement)">Add to cart</a>
+            </div>
+        </div>
+
+        <div class="product" data-id="6">
+            <img src="/images/6.jpeg" class="product-img" alt="Pediatric orthotic">
+            <div class="product-info">
+                <h2 class="product-title">Prosthetic Leg</h2>
+                <p class="product-price">607 ر.س</p>
+                <a class="add-to-cart" onclick="addToCart(this.parentElement.parentElement)">Add to cart</a>
+            </div>
+        </div>
+
+        <div class="product" data-id="7">
+            <img src="/images/7.jpeg" class="product-img" alt="Trauma brace">
+            <div class="product-info">
+                <h2 class="product-title">Prosthetic Leg</h2>
+                <p class="product-price">607 ر.س</p>
+                <a class="add-to-cart" onclick="addToCart(this.parentElement.parentElement)">Add to cart</a>
+            </div>
+        </div>
+
+        <div class="product" data-id="8">
+            <img src="/images/9.jpeg" class="product-img" alt="Orthopedic foot insert">
+            <div class="product-info">
+                <h2 class="product-title">Prosthetic Leg</h2>
+                <p class="product-price">607 ر.س</p>
+                <a class="add-to-cart" onclick="addToCart(this.parentElement.parentElement)">Add to cart</a>
+            </div>
+        </div>
+
+        <div class="product" data-id="9">
+            <img src="/images/10.jpeg" class="product-img" alt="Orthopedic foot insert">
+            <div class="product-info">
+                <h2 class="product-title">Prosthetic Leg</h2>
+                <p class="product-price">607 ر.س</p>
+                <a class="add-to-cart" onclick="addToCart(this.parentElement.parentElement)">Add to cart</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+    <section class="team container" id="about">
+        <h2 class="heading">Technical Directors & Team</h2>
+
+        <div class="team-container">
+
+            <!-- Technical Director -->
+            <div class="team-card">
+                <img src="/images/naif.jpeg" alt="NAIF AL JOUFI" class="team-img">
+                <div class="team-info">
+                    <h3>Technical Director</h3>
+                    <p><strong>NAIF AL JOUFI</strong><br>Managing Director & Co-founder</p>
+                    <p class="bio">
+                        Our technical team is led by our senior Technical Specialist Mr. Badran, a co-founder.
+                        <span class="more-text">
+                            He is Jordanian, graduated from the German National Training Institute in Jordan in 1990
+                            under supervision of GTZ, Royal Jordanian Medical Service, and Ministry of Health in Jordan.
+                            He provided consultancy and technical support to many Jordanian medical establishments. In
+                            1994 he joined the International Committee of Red Cross (ICRC) in Geneva, Switzerland. He
+                            studied polypropylene prosthesis technology and worked internationally as an expert in
+                            Ethiopia, Pakistan, Afghanistan, and Turkmenistan. He joined Saudi German Hospital in 1999
+                            and led the workshop department to international standards. He specializes in plastic
+                            jackets, Milwaukee corsets, shenue jackets, Boston corsets, baby TEV splints, and AFO
+                            splints. Atrafi is proud that Mr. Badran continues to lead its technical services since its
+                            establishment in 2017.
+                        </span>
+                        <a href="#" class="read-more">Read More</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Co-Founder & Director -->
+            <div class="team-card">
+                <img src="/images/yasser.jpeg" alt="Dr. YASSER EID MD. MBA." class="team-img">
+                <div class="team-info">
+                    <h3>Co-Founder & Director</h3>
+                    <p><strong>Dr. YASSER EID MD. MBA.</strong></p>
+                    <p class="bio">
+                        Dr. Yasser Eid is an orthopedic surgeon with an MBA from Leicester University, UK.
+                        <span class="more-text">
+                            He has over 25 years of experience managing private healthcare facilities in GCC,
+                            specializing in orthopedics, physical medicine, orthotics, prosthetics, and rehabilitation.
+                            He has collaborated with international experts from Germany, UK, France, Austria,
+                            Switzerland, and USA. His involvement in technical, scientific, educational, and training
+                            activities has added value to Atrafi's overall performance. Dr. Yasser is an active member
+                            of the American Medical Director Association, Egyptian Medical Syndicate, Middle East Spine
+                            Group, American Society of Quality, and American Academy of Minimal Invasive Spine Medicine
+                            & Surgery.
+                        </span>
+                        <a href="#" class="read-more">Read More</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="contact container" id="contactus">
+        <h2 class="heading">Contact Us</h2>
+
+        <div class="contact-info">
+            <p><strong>Call Mobile:</strong> 0557733980</p>
+            <p>Please contact us directly with any questions, comments, or scheduling inquiries you may have.</p>
+
+            <p><strong>Atrafi</strong><br>
+                23523, Hira Street, Jeddah, Saudi Arabia</p>
+
+            <p><strong>Email:</strong> <a href="mailto:atrafi@atrafi.net">atrafi@atrafi.net</a></p>
+
+            <p><strong>Hours:</strong> Sunday - Thursday: 8AM–5PM<br>
+                Friday - Saturday: Off</p>
+
+            <p><strong>Emergency Service:</strong> 24/7</p>
+        </div>
+
+        <div class="contact-form">
+            <form action="#" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="tel" name="phone" placeholder="Your Phone">
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    
+
+    <script>
+
+        const readMoreLinks = document.querySelectorAll('.read-more');
+
+        readMoreLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const moreText = this.previousElementSibling;
+                if (moreText.style.display === "inline") {
+                    moreText.style.display = "none";
+                    this.textContent = "Read More";
+                } else {
+                    moreText.style.display = "inline";
+                    this.textContent = "Show Less";
+                }
+            });
+        });
+
+    </script>
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>
