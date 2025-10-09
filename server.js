@@ -1,17 +1,17 @@
+// No node-fetch import
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const PAYPAL_CLIENT = 'AXjb9TjKWh8lw3pTXQXQuXYy5DToceT5xrStyQerw4P009ILwaf4Mn9UEO095Jsq2MQ142VZMihKZ_Qy';
-const PAYPAL_SECRET = 'EAvrmeHUMgE6qjlcUR2-iL2wVuBP5nF9Rpul1RV__HrG7jvo3JGMNzRBa1t18mUzjVb6LHwj3XomduQ4';
-const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Sandbox
+const PAYPAL_CLIENT = 'YOUR_CLIENT_ID';
+const PAYPAL_SECRET = 'YOUR_SECRET';
+const PAYPAL_API = 'https://api-m.sandbox.paypal.com';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Generate PayPal access token
 async function generateAccessToken() {
     const res = await fetch(`${PAYPAL_API}/v1/oauth2/token`, {
         method: 'POST',
@@ -21,17 +21,14 @@ async function generateAccessToken() {
         },
         body: 'grant_type=client_credentials'
     });
-
     const data = await res.json();
     return data.access_token;
 }
 
-// Create PayPal order
 app.post('/create-paypal-order', async (req, res) => {
     try {
         const { total } = req.body;
         const accessToken = await generateAccessToken();
-
         const orderRes = await fetch(`${PAYPAL_API}/v2/checkout/orders`, {
             method: 'POST',
             headers: {
@@ -43,7 +40,6 @@ app.post('/create-paypal-order', async (req, res) => {
                 purchase_units: [{ amount: { currency_code: 'USD', value: total.toFixed(2) } }]
             })
         });
-
         const data = await orderRes.json();
         res.json(data);
     } catch (err) {
