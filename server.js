@@ -1,53 +1,50 @@
 const express = require('express');
 const cors = require('cors');
-const stripe = require('stripe')('sk_test_tR3PYbcVNZZ796tH88S4VQ2u'); // Replace with your secret key
 const path = require('path');
+const fetch = require('node-fetch'); // for PayPal REST API calls
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
-const YOUR_DOMAIN = 'http://localhost:3000';
+const PAYPAL_CLIENT = 'AXjb9TjKWh8lw3pTXQXQuXYy5DToceT5xrStyQerw4P009ILwaf4Mn9UEO095Jsq2MQ142VZMihKZ_Qy';
+const PAYPAL_SECRET = 'EAvrmeHUMgE6qjlcUR2-iL2wVuBP5nF9Rpul1RV__HrG7jvo3JGMNzRBa1t18mUzjVb6LHwj3XomduQ4';
+const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Use sandbox for testing
 
-app.post('/create-checkout-session', async (req, res) => {
-    const { cartItems } = req.body;
-
-    if (!cartItems || cartItems.length === 0) {
-        return res.status(400).json({ error: 'Cart is empty' });
-    }
-
-    const line_items = cartItems.map(item => ({
-        price_data: {
-            currency: 'usd',
-            product_data: {
-                name: item.name,
-                images: [item.image],
-            },
-            unit_amount: Math.round(item.price * 100),
+// Generate access token
+async function generateAccessToken() {
+    const response = await fetch(`${PAYPAL_API}/v1/oauth2/token`, {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Basic ' + Buffer.from(PAYPAL_CLIENT + ':' + PAYPAL_SECRET).toString('base64'),
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        quantity: item.quantity,
-    }));
+        body: 'grant_type=client_credentials'
+    });
+    const data = await response.json();
+    return data.access_token;
+}
 
-    try {
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items,
-            mode: 'payment',
-            success_url: `${YOUR_DOMAIN}/html/success.html`,
-            cancel_url: `${YOUR_DOMAIN}/html/cancel.html`,
-        });
+// Create order
+app.post('/create-paypal-order', async (req, res) => {
+    const { total } = req.body;
+    const accessToken = await generateAccessToken();
 
-        res.json({ url: session.url });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: err.message });
-    }
-});
+    const response = await fetch(`${PAYPAL_API}/v2/checkout/orders`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+            intent: 'CAPTURE',
+            purchase_units: [{ amount: { currency_code: 'USD', value: total.toFixed(2) } }]
+        })
+    });
 
-// Redirect root to index.html
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    const data = await response.json();
+    res.json(data);
 });
 
 app.listen(3000, () => console.log('Server running on http://localhost:3000'));
