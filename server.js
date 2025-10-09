@@ -1,16 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const fetch = require('node-fetch'); // for PayPal REST API calls
+
+const PAYPAL_CLIENT = 'AXjb9TjKWh8lw3pTXQXQuXYy5DToceT5xrStyQerw4P009ILwaf4Mn9UEO095Jsq2MQ142VZMihKZ_Qy';
+const PAYPAL_SECRET = 'EAvrmeHUMgE6qjlcUR2-iL2wVuBP5nF9Rpul1RV__HrG7jvo3JGMNzRBa1t18mUzjVb6LHwj3XomduQ4';
+const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Sandbox for testing
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
-const PAYPAL_CLIENT = 'AXjb9TjKWh8lw3pTXQXQuXYy5DToceT5xrStyQerw4P009ILwaf4Mn9UEO095Jsq2MQ142VZMihKZ_Qy';
-const PAYPAL_SECRET = 'EAvrmeHUMgE6qjlcUR2-iL2wVuBP5nF9Rpul1RV__HrG7jvo3JGMNzRBa1t18mUzjVb6LHwj3XomduQ4';
-const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Use sandbox for testing
 
 // Generate access token
 async function generateAccessToken() {
@@ -26,25 +25,31 @@ async function generateAccessToken() {
     return data.access_token;
 }
 
-// Create order
+// Create PayPal order
 app.post('/create-paypal-order', async (req, res) => {
-    const { total } = req.body;
-    const accessToken = await generateAccessToken();
+    try {
+        const { total } = req.body;
+        const accessToken = await generateAccessToken();
 
-    const response = await fetch(`${PAYPAL_API}/v2/checkout/orders`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        },
-        body: JSON.stringify({
-            intent: 'CAPTURE',
-            purchase_units: [{ amount: { currency_code: 'USD', value: total.toFixed(2) } }]
-        })
-    });
+        const response = await fetch(`${PAYPAL_API}/v2/checkout/orders`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify({
+                intent: 'CAPTURE',
+                purchase_units: [{ amount: { currency_code: 'USD', value: total.toFixed(2) } }]
+            })
+        });
 
-    const data = await response.json();
-    res.json(data);
+        const data = await response.json();
+        res.json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'PayPal order creation failed' });
+    }
 });
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
