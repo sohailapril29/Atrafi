@@ -400,3 +400,37 @@ section {
 :target {
   scroll-margin-top: 80px; /* height of your navbar */
 }
+
+
+
+
+.mission-section img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.mission-section h3 {
+    color: var(--main-color);
+    margin-bottom: 10px;
+}
+
+.mission-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+}
+
+@media (max-width: 992px) {
+    .mission-section .row {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    .mission-section img {
+        max-width: 90%;
+        margin: 0 auto 15px;
+        height: auto;
+    }
+}
