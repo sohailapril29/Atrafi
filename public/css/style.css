@@ -39,6 +39,7 @@ img {
 
 section {
     padding: 4rem 0 2rem;
+    scroll-margin-top: 80px; /* offset so it doesn't hide under navbar */
 }
 
 .container {
@@ -129,7 +130,7 @@ section {
     font-weight: 800;
     text-transform: uppercase;
     position: absolute;
-    top: 50%;
+    top: 7%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--hero-text-color);
@@ -392,4 +393,10 @@ section {
 @media (max-width: 600px) {
     .team-card { width: 100%; }
     .contact-form { width: 100%; padding: 0 10px; }
+}
+
+
+
+:target {
+  scroll-margin-top: 80px; /* height of your navbar */
 }
